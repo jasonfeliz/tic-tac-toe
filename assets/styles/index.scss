@@ -1,1 +1,26 @@
 @import '~bootstrap/scss/bootstrap';
+
+body{
+	padding: 0 5px;
+}
+
+#gameBoard {
+	width: 450px;
+	display:flex;
+	flex-wrap:wrap;
+	margin: 0 auto;
+}
+
+.square{
+	width: 150px;
+	height: 150px;
+	text-align: center;
+	border: solid 1px black;
+	cursor:pointer;
+	transition : all 0.5s;
+}
+
+.square:hover{
+	background: #5e5e5e;
+}
+
