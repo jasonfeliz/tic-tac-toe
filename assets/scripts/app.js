@@ -5,7 +5,6 @@ const events = require('./events.js')
 
 
 $(() => {
-	
 	const gameObj = {
 		player_one:"x",
 		player_two:"o",
@@ -24,6 +23,9 @@ $(() => {
 		events.makeMove($(this),gameObj)
 	})
 
+	$('#resetButton').click(function(){
+		events.resetGame(gameObj) //reset board
+	})
 
 
 
