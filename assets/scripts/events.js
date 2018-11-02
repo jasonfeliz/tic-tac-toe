@@ -72,7 +72,7 @@ const makeMove = function(_data,gameObj){
 }
 
 const checkWinner = function(i,a){
-	console.log(a)
+	// console.log(a)
 	const combos = [
 		[0,1,2],
 		[0,4,8],
@@ -80,7 +80,7 @@ const checkWinner = function(i,a){
 		[1,4,7],
 		[2,4,6],
 		[2,5,8],
-		[4,5,5],
+		[4,5,6],
 		[6,7,8]]
 
 	let match = combos.find(function (index){
