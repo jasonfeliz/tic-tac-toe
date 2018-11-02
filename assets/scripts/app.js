@@ -21,7 +21,7 @@ $(() => {
 	events.createGame(gameObj);
 	//when user clicks
 	$('.square').click(function(){
-		events.displayMove($(this),gameObj)
+		events.makeMove($(this),gameObj)
 	})
 
 

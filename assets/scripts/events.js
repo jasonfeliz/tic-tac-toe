@@ -19,7 +19,7 @@ const createGame = function(gameObj){
 }
 
 
-const displayMove = function(_data,gameObj){
+const makeMove = function(_data,gameObj){
 	const currentSquareIndex = _data.data('squareid')
 	if(_data.text() === "") {
 		_data.text(gameObj.currentPlayer)
@@ -72,7 +72,7 @@ const checkWinner = function(i,a){
 
 module.exports = {
 	displayBoard,
-	displayMove,
+	makeMove,
 	createGame,
 	checkWinner
 }
