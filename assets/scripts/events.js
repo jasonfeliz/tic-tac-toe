@@ -1,11 +1,13 @@
 
+const ui = require('./ui.js')
+
 const displayBoard = function(){
 	const arr = new Array(3);
 	let counter = 0;
 	for(let i =0; i < arr.length; i++){
 		arr[i] = new Array(3);
 		for(let j=0;j<arr.length;j++){
-			$('#gameBoard').append('<div class="square"  data-squareId="'+counter+'"></div>')
+			$('#gameBoard').append('<div class="square" data-squareId="'+counter+'"></div>')
 			counter++
 		}
 	}
@@ -17,14 +19,28 @@ const createGame = function(gameObj){
 }
 
 
-const displayMove = function(data,gameObj){
-	if(data.text() === "") {
-		data.text(gameObj.currentPlayer)
-		if ( data.text() === "x") {
+const displayMove = function(_data,gameObj){
+	const currentSquareIndex = _data.data('squareid')
+	if(_data.text() === "") {
+		_data.text(gameObj.currentPlayer)
+		gameObj.moves[currentSquareIndex] = gameObj.currentPlayer
+		if ( _data.text() === "x") {
 			gameObj.currentPlayer = gameObj.player_two
 		}else{
 			gameObj.currentPlayer = gameObj.player_one
 		}
+		const movesArr = gameObj.moves
+		let movesArrLength = movesArr.filter((e) => isNaN(e)).length
+		if(movesArrLength > 4){
+			const _winner = checkWinner(currentSquareIndex,movesArr) 
+			if (!_winner && movesArrLength === 9) {
+				ui.tieHandler(_winner)
+			}else if(_winner){
+				ui.winHandler(_winner,gameObj)
+			}
+		}
+
+		
 	}else{
 		console.log("not empty")
 	}
@@ -32,28 +48,23 @@ const displayMove = function(data,gameObj){
 	
 }
 
-const checkWinner = function(_data){
-	const arr = []
-	const arr2 = []
-	 $('#gameBoard div').map(function(i){
-		arr[i] = {square: $(this).text()}
-	})
-	let square1 = arr[0].square
-	let square2 = arr[1].square
-	let square3 = arr[2].square
-	let square4 = arr[3].square
-	let square5 = arr[4].square
-	let square6 = arr[5].square
-	let square7 = arr[6].square
-	let square8 = arr[7].square
-	let square8 = arr[8].square
-	if((square1 === square2 && square1 === square3) || (square2 === square5 && square2 === square8)){
-		console.log("winnner")
-	}
+const checkWinner = function(i,a){
+		if (   (a[0] === a[1] && a[0]===a[2]) 
+			|| (a[0] === a[4] && a[0]===a[8]) 
+			|| (a[0] === a[3] && a[0]===a[6]) 
+			|| (a[1] === a[4] && a[1]===a[7]) 
+			|| (a[2] === a[4] && a[2]===a[6])        
+			|| (a[2] === a[5] && a[2]===a[8]) 
+			|| (a[3] === a[4] && a[3]===a[5]) 
+			|| (a[6] === a[7] && a[6]===a[8]) ){
 
+				
+				return a[i]
+		}else{
 
-
-
+			return false
+		}
+	
 }
 
 
