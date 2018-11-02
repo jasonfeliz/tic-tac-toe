@@ -49,22 +49,21 @@ const makeMove = function(_data,gameObj){
 }
 
 const checkWinner = function(i,a){
-		if (   (a[0] === a[1] && a[0]===a[2]) 
-			|| (a[0] === a[4] && a[0]===a[8]) 
-			|| (a[0] === a[3] && a[0]===a[6]) 
-			|| (a[1] === a[4] && a[1]===a[7]) 
-			|| (a[2] === a[4] && a[2]===a[6])        
-			|| (a[2] === a[5] && a[2]===a[8]) 
-			|| (a[3] === a[4] && a[3]===a[5]) 
-			|| (a[6] === a[7] && a[6]===a[8]) ){
-
-				
-				return a[i]
-		}else{
-
-			return false
-		}
-	
+	const winObj = {
+		 case1 : a[0] === a[1] && a[0]===a[2],
+		 case2 : a[0] === a[4] && a[0]===a[8],
+		 case3 : a[0] === a[3] && a[0]===a[6],
+		 case4 : a[1] === a[4] && a[1]===a[7],
+		 case5 : a[2] === a[4] && a[2]===a[6],
+		 case6 : a[2] === a[5] && a[2]===a[8],
+		 case7 : a[3] === a[4] && a[3]===a[5],
+		 case8 : a[6] === a[7] && a[6]===a[8]
+	}
+	if (winObj.case1 || winObj.case2 || winObj.case3 || winObj.case4 || winObj.case5 || winObj.case6 || winObj.case7 || winObj.case8) {
+		return a[i]
+	}else{
+		return false;
+	}	
 }
 
 
