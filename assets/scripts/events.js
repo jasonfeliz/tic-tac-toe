@@ -29,6 +29,7 @@ const resetGame = function(gameObj){
 	}
 	gameObj.currentPlayer = gameObj.player_one
 	gameObj.winner = false	
+	$('#message').html(gameObj.currentPlayer+ " , it's your turn to play")
 }
 
 
@@ -40,15 +41,18 @@ const endGame = function(){
 
 const makeMove = function(_data,gameObj){
 	const currentSquareIndex = _data.data('squareid')
+	$('#message').text()
 		if(_data.text() === "") {
-			$('#message').html("")
 			_data.text(gameObj.currentPlayer)
 			gameObj.moves[currentSquareIndex] = gameObj.currentPlayer
 			if ( _data.text() === "x") {
+				_data.css('color','#ea7363')
 				gameObj.currentPlayer = gameObj.player_two
 			}else{
+				_data.css('color','#5a626f')
 				gameObj.currentPlayer = gameObj.player_one
 			}
+			$('#message').html(gameObj.currentPlayer+ " , it's your turn to play")
 			const movesArr = gameObj.moves
 			let movesArrLength = movesArr.filter((e) => isNaN(e)).length
 			if(movesArrLength > 4){
@@ -80,7 +84,7 @@ const checkWinner = function(i,a){
 		[1,4,7],
 		[2,4,6],
 		[2,5,8],
-		[4,5,6],
+		[3,4,5],
 		[6,7,8]]
 
 	let match = combos.find(function (index){
@@ -89,7 +93,7 @@ const checkWinner = function(i,a){
         } 
 	}) 
 	if (match) {
-		return a[match[0]]
+		return a[i]
 	}else{
 		return false
 	}

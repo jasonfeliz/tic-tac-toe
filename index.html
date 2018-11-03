@@ -6,6 +6,7 @@
 
       <!-- Do not add `link` tags-->
       <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans|Quicksand" rel="stylesheet">
 
       <!-- Do not add `script` tags-->
       <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
@@ -14,26 +15,31 @@
     <body>
       <header>
         <div>logo</div>
-        <div>
+        <div class="header-links" id="header-links">
           <div>Hello, User!</div>
-          <button>Log Out</button>
           <button>Change Password</button>
+          <button>Log Out</button>
         </div>
-        <nav>
-          <div>
-            <a href="#">Start New Game</a>
-          </div>
-          <div>
-            <a href="#">Past Games</a>
-          </div>
-          <div>
-            <a href="#">My Profile</a>
-          </div>
-        </nav>
       </header>
+
+        <nav>
+          <h1>TIC TAC TOE</h1>
+          <div>
+            <div>
+              <a href="#">Start New Game</a>
+            </div>
+            <div>
+              <a href="#">Past Games</a>
+            </div>
+            <div>
+              <a href="#">Profile</a>
+            </div>           
+          </div>
+
+        </nav>
       <section id="main-content">
-        <button id="resetButton"> Reset Game</button>
         <div id="message"></div>
+        <button id="resetButton"> Reset Game</button>
         <div id=gameBoard></div>       
       </section>
 

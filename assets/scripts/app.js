@@ -17,7 +17,9 @@ $(() => {
 		gameObj.moves[i] = Math.random();
 	}
 	// //when page loads, create tic tac toe board
+	
 	events.createGame(gameObj);
+	$('#message').html(gameObj.currentPlayer + " , it's your turn to play")
 	//when user clicks
 	$('.square').click(function(){
 		events.makeMove($(this),gameObj)

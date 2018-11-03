@@ -1,26 +1,127 @@
 @import '~bootstrap/scss/bootstrap';
-
-body{
-	padding: 0 5px;
+body * {
+	transition : all 0.25s;
+	font-family: 'Open Sans', sans-serif;
 }
 
+header{
+	display:flex;
+	padding: 20px 10px;
+	border-bottom: solid 1px rgba(0,0,0,.2);
+	margin-bottom: 2px;
+}
+
+
+
+
+header > .header-links {
+	display:flex;
+	margin-left:auto;
+	align-items:center;
+}
+
+header > .header-links * {
+	margin: 0 10px;
+}
+header > .header-links > div {
+	color:#ea7363;
+}
+button
+{
+	background: #fff;
+	border: solid 1px rgba(0,0,0,.2);
+	border-radius: 30px;
+	padding: 7px 10px;
+	cursor:pointer;
+	color:#525252;
+	font-size:.75em;
+}
+header > .header-links button:hover {
+	background: #ea7363;
+	color:#fff;
+	border-color:#ea7363;
+}
+button:focus{
+	outline:none;
+}
+button:hover{
+	
+}
+nav{
+	text-align: center;
+	padding:25px 0 5px 0;
+	border-bottom: solid 1px rgba(0,0,0,.2);
+	margin-bottom: 10px;
+	background: rgb(90, 98, 111);
+
+}
+nav > h1 {
+	color: #fff;
+	font-family: 'Quicksand', sans-serif;
+	font-weight:lighter;
+}
+nav > div{
+	display:flex;
+	margin: 10px;
+}
+
+nav > div > div >a {
+	color: #fff;
+	font-size:.9em;
+	margin: 0 10px;
+}
+nav > div > div:first-child > a{
+	border:solid 1px #fff;
+	border-radius:4px;
+	padding:7px 5px;
+}
+nav > div > div >a:hover{
+	color:#d9d9d9;
+	text-decoration:none;
+}
+nav > div > div:first-child > a:hover{
+	background:#ea7363;
+	border-color:#ea7363;
+	color:#fff;
+}
 #gameBoard {
 	width: 450px;
 	display:flex;
 	flex-wrap:wrap;
 	margin: 0 auto;
+
 }
 
 .square{
 	width: 150px;
 	height: 150px;
 	text-align: center;
-	border: solid 1px black;
+	box-shadow:1px 1px 5px 0px rgba(0, 0, 0, 0.32);
 	cursor:pointer;
-	transition : all 0.5s;
+	font-family: fantasy;
+	font-size: 100px;
+	color: #ea7363;
+
 }
 
 .square:hover{
-	background: #5e5e5e;
+	background: #f6f6f6;
 }
 
+#main-content {
+	max-width: 600px;
+	margin:75px auto 0 auto;
+	text-align:center;
+}
+
+#resetButton {
+	margin: 15px 0;
+	background: #ea7363;
+	color:#fff;
+	border-color:#ea7363;
+}
+
+#resetButton:hover{
+	background: #fff;
+	color:#ea7363;
+}
