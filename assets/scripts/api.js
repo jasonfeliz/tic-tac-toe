@@ -41,6 +41,9 @@ const signInApi = function(){
 			$('#signedin').show()
 			$('#main-content').css("filter","unset")
 			$('#signedin,.nav-links').show()
+			$('#gameBoard div').map(function(){
+				$(this).css("pointer-events","unset")
+			});
 		},
 		error: function(response){
 			$('.modal-message').show()

@@ -11,7 +11,10 @@ header{
 }
 
 
-
+.logo > img{
+	height:45px;
+	width:45px;
+}
 
 header > .header-links {
 	display:flex;
@@ -69,20 +72,12 @@ nav > div > div >a {
 	font-size:.9em;
 	margin: 0 10px;
 }
-nav > div > div:first-child > a{
-	border:solid 1px #fff;
-	border-radius:4px;
-	padding:7px 5px;
-}
+
 nav > div > div >a:hover{
 	color:#d9d9d9;
 	text-decoration:none;
 }
-nav > div > div:first-child > a:hover{
-	background:#ea7363;
-	border-color:#ea7363;
-	color:#fff;
-}
+
 #gameBoard {
 	width: 450px;
 	display:flex;
@@ -155,7 +150,7 @@ nav > div > div:first-child > a:hover{
 	color:#ea7363;
 }
 
-#welcome-message {
+#welcome-message,#message {
 	display:none;
     margin: 0 auto;
     width: 75%;
@@ -166,9 +161,14 @@ nav > div > div:first-child > a:hover{
     padding: 10px;
     border-radius: 10px;
 }
-
+#message {
+	display:block;
+	font-size: 20px;
+}
 #welcome-message.failed,
-.modal-message {
+.modal-message,
+#message.failed
+ {
 	background: #d34b4b;
 }
 
@@ -207,3 +207,4 @@ input {
     border: solid 1px #d7d7d7;
     margin: 5px 0;
 }
+

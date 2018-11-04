@@ -20,6 +20,8 @@ $(() => {
 	}
 
 	$('#signedin,.nav-links').hide()
+	$('#welcome-message').show()
+	$('#welcome-message').html("Register or Sign In to get started!")
 	//when user clicks register button
 	$("#register-button").click(events.onSignUp)
 	$("#signin-button").click(events.onSignIn)
@@ -28,6 +30,9 @@ $(() => {
 
 	// //when page loads, create tic tac toe board
 		events.createGame(gameObj);
+		$('#gameBoard div').map(function(){
+			$(this).css("pointer-events","none")
+		});
 		$('#message').html(gameObj.currentPlayer + " , it's your turn to play")
 		//when user clicks
 		$('.square').click(function(){
