@@ -1,4 +1,4 @@
-
+const api = require('./api.js')
 const ui = require('./ui.js')
 
 const displayBoard = function(){
@@ -100,7 +100,11 @@ const checkWinner = function(i,a){
 	
 }
 
-
+//registrations and signup handlers
+const onSignUp = function(){
+	event.preventDefault()
+	api.signUpApi()
+}
 
 
 module.exports = {
@@ -108,5 +112,6 @@ module.exports = {
 	makeMove,
 	createGame,
 	checkWinner,
-	resetGame
+	resetGame,
+	onSignUp
 }

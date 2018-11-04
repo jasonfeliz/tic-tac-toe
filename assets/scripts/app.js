@@ -18,6 +18,10 @@ $(() => {
 	for(let i=0;i < 9;i++){
 		gameObj.moves[i] = Math.random();
 	}
+	//when user clicks register button
+	$("#register-button").click(events.onSignUp)
+
+
 	// //when page loads, create tic tac toe board
 	if(loggedIn){
 		
