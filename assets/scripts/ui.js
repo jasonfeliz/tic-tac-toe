@@ -1,3 +1,17 @@
+$('.close,.cancel-button').click(function(){
+	$('.modal').hide()
+})
+
+$('#register').click(function(){
+	$('#register-modal').show()
+})
+$('#signin').click(function(){
+	$('#signin-modal').show()
+})
+$('#change-password').click(function(){
+	$('#cp-modal').show()
+})
+
 
 const winHandler = function(_winner,gameObj){
 	if (_winner === "x") {

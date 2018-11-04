@@ -1,6 +1,5 @@
 @import '~bootstrap/scss/bootstrap';
 body * {
-	transition : all 0.25s;
 	font-family: 'Open Sans', sans-serif;
 }
 
@@ -135,6 +134,8 @@ nav > div > div:first-child > a:hover{
 	color:#fff;
 }
 #main-content {
+	  -webkit-filter: blur(5px);
+	  filter: blur(5px);
 	max-width: 600px;
 	margin:75px auto 0 auto;
 	text-align:center;
@@ -152,4 +153,57 @@ nav > div > div:first-child > a:hover{
 #resetButton:hover{
 	background: #fff;
 	color:#ea7363;
+}
+
+#welcome-message {
+	display:none;
+    margin: 0 auto;
+    width: 75%;
+    text-align: center;
+    font-size: 25px;
+    background: #75bf75;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#welcome-message.failed,
+.modal-message {
+	background: #d34b4b;
+}
+
+.modal-message{
+	display:none;
+	background: #d34b4b;
+    color: #fff;
+    text-align: center;
+    margin: 10px 0;
+    padding: 5px;
+    border-radius: 5px;
+}
+.modal-footer > button {
+	background: #ea7363;
+	border:none;
+}
+.modal-footer > button:hover{
+	background:#d34430;
+}
+.cancel-button {
+	background: #fff !important;
+	color: #ea7363;
+	border:solid 1px #d7d7d7 !important;
+}
+.cancel-button:hover{
+	color: #ea7363;
+}
+ form {
+ 	display:flex;
+ 	flex-direction:column;
+ }
+input {
+	padding: 5px;
+    border-radius: 3px;
+    outline: none;
+    border: solid 1px #d7d7d7;
+    margin: 5px 0;
 }

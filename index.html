@@ -28,7 +28,7 @@
 
         <nav>
           <h1>TIC TAC TOE</h1>
-          <div>
+          <div class="nav-links">
             <div>
               <a href="#">Start New Game</a>
             </div>
@@ -41,31 +41,95 @@
           </div>
 
         </nav>
+      <div id="welcome-message"></div>
       <section id="main-content">
         <div id="message"></div>
         <button id="resetButton"> Reset Game</button>
         <div id=gameBoard></div>       
       </section>
 
-      <section id="landing-page">
-        <div class="overlay">
-        </div>
-        <div class="landing-heading">
-           <h2>Welcome to a Tic-Tac-Toe Adventure</h2>
-        </div>
-        <div class="signup-forms">
-          <h3>Register to play!</h3>
+
+
+      
+<!-- modal windows -->
+<div class="modal" id="register-modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Register to play!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-message"></div>
           <form id="register-form">
               <input type="text" name="email" placeholder="Enter email">
               <input type="password" name="password" placeholder="Choose a Password">
               <input type="password" name="password_confirmation" placeholder="Confrim Password">
-              <button id="register-button">Register!</button>
           </form>
-          <div>Already registered? <span>Login here</span> </div>
-        </div>
-      </section>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="register-button">Sign Up</button>
+        <button type="button" class="btn btn-secondary cancel-button">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end register modal -->
 
-      
+
+<!-- modal windows -->
+<div class="modal" id="signin-modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Sign In</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="modal-message"></div>
+          <form id="signin-form">
+              <input type="text" name="email" placeholder="Enter email">
+              <input type="password" name="password" placeholder="Enter Password">
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="signin-button">Sign In</button>
+        <button type="button" class="btn btn-secondary cancel-button">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end sign in modal -->
+
+<div class="modal" id="cp-modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Change Password</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="modal-message"></div>
+          <form id="change-password-form">
+              <input type="password" name="old" placeholder="Old Password">
+              <input type="password" name="new" placeholder="New Password">
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="cp-button">Change Password</button>
+        <button type="button" class="btn btn-secondary cancel-button">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end change password modal -->
+
 
     </body>
 </html>

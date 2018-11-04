@@ -18,13 +18,15 @@ $(() => {
 	for(let i=0;i < 9;i++){
 		gameObj.moves[i] = Math.random();
 	}
+
+	$('#signedin,.nav-links').hide()
 	//when user clicks register button
 	$("#register-button").click(events.onSignUp)
-
+	$("#signin-button").click(events.onSignIn)
+	$("#cp-button").click(events.onChangePassword)
+	$("#signout").click(events.onSignOut)
 
 	// //when page loads, create tic tac toe board
-	if(loggedIn){
-		
 		events.createGame(gameObj);
 		$('#message').html(gameObj.currentPlayer + " , it's your turn to play")
 		//when user clicks
@@ -35,9 +37,7 @@ $(() => {
 		$('#resetButton').click(function(){
 			events.resetGame(gameObj) //reset board
 		})		
-	}else{
-		$('#signedin, nav, #main-content').css("display","none")
-	}
+
 
 
 

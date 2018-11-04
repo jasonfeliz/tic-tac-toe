@@ -1,5 +1,6 @@
 const api = require('./api.js')
 const ui = require('./ui.js')
+const store = require('./store.js')
 
 const displayBoard = function(){
 	const arr = new Array(3);
@@ -105,13 +106,26 @@ const onSignUp = function(){
 	event.preventDefault()
 	api.signUpApi()
 }
-
-
+const onSignIn = function(){
+	event.preventDefault()
+	api.signInApi()
+}
+const onSignOut = function(){
+	event.preventDefault()
+	api.signOutApi()
+}
+const onChangePassword = function(){
+	event.preventDefault()
+	api.changePasswordApi()
+}
 module.exports = {
 	displayBoard,
 	makeMove,
 	createGame,
 	checkWinner,
 	resetGame,
-	onSignUp
+	onSignUp,
+	onSignIn,
+	onSignOut,
+	onChangePassword
 }
