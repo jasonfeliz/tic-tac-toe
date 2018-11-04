@@ -100,7 +100,9 @@ const checkWinner = function(i,a){
 	}
 	
 }
-
+const onCreateGame = function(getToken){
+	api.createGameApi(getToken)
+}
 //registrations and signup handlers
 const onSignUp = function(){
 	event.preventDefault()
@@ -108,6 +110,7 @@ const onSignUp = function(){
 }
 const onSignIn = function(){
 	event.preventDefault()
+	
 	api.signInApi()
 }
 const onSignOut = function(){
@@ -127,5 +130,6 @@ module.exports = {
 	onSignUp,
 	onSignIn,
 	onSignOut,
-	onChangePassword
+	onChangePassword,
+	onCreateGame
 }

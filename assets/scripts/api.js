@@ -1,6 +1,5 @@
 const store = require('./store.js')
 const baseUrl = "https://tic-tac-toe-wdi.herokuapp.com/"
-
 const signUpApi = function(){
 	const credentialsObj = {"credentials":{}}
 	$('#register-form').serializeArray().forEach(function(e){
@@ -35,6 +34,7 @@ const signInApi = function(){
 		data: credentialsObj,
 		success: function(response){
 			store.token = response.user.token
+			sessionStorage.setItem("token",response.user.token)
 			$('.modal').hide()
 			$('#welcome-message').hide()
 			$('#not-signedin,.modal-message').hide()
@@ -50,10 +50,11 @@ const signInApi = function(){
 			$('.modal-message').html("Email/Password combination is invalid. Try again")
 		}
 	})
+
+
 }
 
 const signOutApi = function(){
- 
 	return $.ajax({
 		method:"DELETE",
 		url: baseUrl + "sign-out",
@@ -71,6 +72,7 @@ const signOutApi = function(){
 }
 
 const changePasswordApi = function(){
+
 	const passwordObj = {"passwords":{}}
 	$('#change-password-form').serializeArray().forEach(function(e){
 		passwordObj.passwords[e.name] = e.value
@@ -96,12 +98,28 @@ const changePasswordApi = function(){
 		}
 	})
 }
-
-
+const createGameApi = function(getToken){
+	const token = getToken
+	return $.ajax({
+		method:"POST",
+		url: baseUrl + "games",
+		headers: {
+			Authorization: "Token token=" + token
+		},		
+		data: {},
+		success: function(response){
+			console.log(response)
+		},
+		error: function(response){
+			console.log(response)
+		}
+	})
+}
 
 module.exports = {
 	signUpApi,
 	signInApi,
 	signOutApi,
-	changePasswordApi
+	changePasswordApi,
+	createGameApi
 }
