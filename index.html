@@ -15,10 +15,14 @@
     <body>
       <header>
         <div>logo</div>
-        <div class="header-links" id="header-links">
+        <div class="header-links" id="signedin">
           <div>Hello, User!</div>
-          <button>Change Password</button>
-          <button>Log Out</button>
+          <button id="change-password">Change Password</button>
+          <button id="signout">Log Out</button>
+        </div>
+        <div class="header-links" id="not-signedin">
+          <button id="register">Register</button>
+          <button id="signin">Sign In</button>
         </div>
       </header>
 
@@ -41,6 +45,24 @@
         <div id="message"></div>
         <button id="resetButton"> Reset Game</button>
         <div id=gameBoard></div>       
+      </section>
+
+      <section id="landing-page">
+        <div class="overlay">
+        </div>
+        <div class="landing-heading">
+           <h2>Welcome to a Tic-Tac-Toe Adventure</h2>
+        </div>
+        <div class="signup-form">
+          <h3>Register to play!</h3>
+          <form>
+              <input type="text" name="email" placeholder="Enter email">
+              <input type="password" name="password" placeholder="Choose a Password">
+              <input type="password" name="password_confirmation" placeholder="Confrim Password">
+              <button type="submit">Register!</button>
+          </form>
+          <div>Already registered? <span>Login here</span> </div>
+        </div>
       </section>
 
       
