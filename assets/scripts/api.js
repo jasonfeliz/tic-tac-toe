@@ -1,5 +1,8 @@
+
+const ui = require('./ui.js')
 const store = require('./store.js')
-const baseUrl = "https://tic-tac-toe-wdi.herokuapp.com/"
+const config = require('./config.js')
+
 const signUpApi = function(){
 	const credentialsObj = {"credentials":{}}
 	$('#register-form').serializeArray().forEach(function(e){
@@ -7,19 +10,10 @@ const signUpApi = function(){
 	}) 
 	return $.ajax({
 		method:"POST",
-		url: baseUrl + "sign-up",
+		url: config.apiUrl + "sign-up",
 		data: credentialsObj,
-		success: function(response){
-			$('.modal').hide()
-			$('#welcome-message').html("Registration Successful! Sign In to start playing!")
-			$('.modal-message').hide()
-			$('.modal-message').html("")
-			$('#welcome-message').show()
-		},
-		error: function(response){
-			$('.modal-message').show()
-			$('.modal-message').html("Oops! Something went wrong. Try again.")
-		}
+		success: ui.signUpSuccessHandler,
+		error: ui.signUpFailureHandler
 	})
 }
 
@@ -30,25 +24,10 @@ const signInApi = function(){
 	}) 
 	return $.ajax({
 		method:"POST",
-		url: baseUrl + "sign-in",
+		url: config.apiUrl + "sign-in",
 		data: credentialsObj,
-		success: function(response){
-			store.token = response.user.token
-			sessionStorage.setItem("token",response.user.token)
-			$('.modal').hide()
-			$('#welcome-message').hide()
-			$('#not-signedin,.modal-message').hide()
-			$('#signedin').show()
-			$('#main-content').css("filter","unset")
-			$('#signedin,.nav-links').show()
-			$('#gameBoard div').map(function(){
-				$(this).css("pointer-events","unset")
-			});
-		},
-		error: function(response){
-			$('.modal-message').show()
-			$('.modal-message').html("Email/Password combination is invalid. Try again")
-		}
+		success: ui.signInSuccessHandler,
+		error: ui.signInFailureHandler
 	})
 
 
@@ -57,17 +36,11 @@ const signInApi = function(){
 const signOutApi = function(){
 	return $.ajax({
 		method:"DELETE",
-		url: baseUrl + "sign-out",
+		url: config.apiUrl + "sign-out",
 		headers: {
-			Authorization: "Token token=" + store.token
+			Authorization: "Token token=" + store.user.token
 		},
-		success: function(response){
-			$('#welcome-message').html("You have logged out. Come back soon!")
-			$('#welcome-message').show()
-			$('#signedin,.nav-links,.modal-message').hide()
-			$('#not-signedin').show()
-			$('#main-content').css("filter","blur(5px)")
-		}
+		success: ui.signOutSuccessHandler
 	})
 }
 
@@ -79,9 +52,9 @@ const changePasswordApi = function(){
 	}) 
 	return $.ajax({
 		method:"PATCH",
-		url: baseUrl + "change-password",
+		url: config.apiUrl + "change-password",
 		headers: {
-			Authorization: "Token token=" + store.token
+			Authorization: "Token token=" + store.user.token
 		},
 		data: passwordObj,
 		success: function(response){
@@ -98,28 +71,65 @@ const changePasswordApi = function(){
 		}
 	})
 }
-const createGameApi = function(getToken){
-	const token = getToken
+const createGameApi = function(){
 	return $.ajax({
 		method:"POST",
-		url: baseUrl + "games",
+		url: config.apiUrl + "games",
 		headers: {
-			Authorization: "Token token=" + token
+			Authorization: "Token token=" + store.user.token
 		},		
 		data: {},
-		success: function(response){
-			console.log(response)
-		},
-		error: function(response){
-			console.log(response)
-		}
+		success: ui.createGameSuccessHandler,
+		error: ui.createGameFailedHandler
+
 	})
 }
 
+const updateGameApi = function(currentMove,currentIndex,over){
+	if (over) {
+		over = true
+	}else{
+		over = false
+	}
+	const currentGameId = store.game.id
+	const gameObj = {
+			  "game": {
+			    "cell": {
+			      "index": currentIndex,
+			      "value": currentMove
+			    },
+			    "over": over
+			  }
+		}
+	return $.ajax({
+		method:"PATCH",
+		url: config.apiUrl + "games/" + currentGameId,
+		headers: {
+			Authorization: "Token token=" + store.user.token
+		},		
+		data: gameObj
+	})
+}
+
+const getGamesApi = function(){
+
+	let content = ""
+	return $.ajax({
+		method:"GET",
+		url: config.apiUrl + "games?over=true",
+		headers: {
+			"Content-type": 'application/json',
+			Authorization: "Token token=" + store.user.token
+		},
+		success: ui.getGamesHandler
+	})
+}
 module.exports = {
 	signUpApi,
 	signInApi,
 	signOutApi,
 	changePasswordApi,
-	createGameApi
+	createGameApi,
+	updateGameApi,
+	getGamesApi
 }

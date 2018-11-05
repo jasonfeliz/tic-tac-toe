@@ -1,8 +1,8 @@
 const api = require('./api.js')
 const ui = require('./ui.js')
-const store = require('./store.js')
 
 const displayBoard = function(){
+	$('#gameBoard').html("")
 	const arr = new Array(3);
 	let counter = 0;
 	for(let i =0; i < arr.length; i++){
@@ -15,23 +15,19 @@ const displayBoard = function(){
 }
 
 const createGame = function(gameObj){
+	api.createGameApi()
+	for(let i=0;i < 9;i++){
+		gameObj.moves[i] = i;
+	}
 	displayBoard()
 	gameObj.currentPlayer = gameObj.player_one
-}
-
-const resetGame = function(gameObj){
-	$('#gameBoard div').map(function(){
-		$(this).text("")
-		$(this).css("pointer-events","unset")
-
-	})
-	for(let i=0;i < 9;i++){
-		gameObj.moves[i] = Math.random();
-	}
-	gameObj.currentPlayer = gameObj.player_one
 	gameObj.winner = false	
+	$('#message,#resetButton').show()
 	$('#message').html(gameObj.currentPlayer+ " , it's your turn to play")
+
 }
+
+
 
 
 const endGame = function(){
@@ -42,8 +38,8 @@ const endGame = function(){
 
 const makeMove = function(_data,gameObj){
 	const currentSquareIndex = _data.data('squareid')
-	$('#message').text()
 		if(_data.text() === "") {
+			api.updateGameApi(gameObj.currentPlayer,currentSquareIndex,false)
 			_data.text(gameObj.currentPlayer)
 			gameObj.moves[currentSquareIndex] = gameObj.currentPlayer
 			if ( _data.text() === "x") {
@@ -59,10 +55,12 @@ const makeMove = function(_data,gameObj){
 			if(movesArrLength > 4){
 				const _winner = checkWinner(currentSquareIndex,movesArr) 
 				if (!_winner && movesArrLength === 9) {
+					api.updateGameApi(_data.text(),currentSquareIndex,true)
 					ui.tieHandler(_winner)
 					endGame()
 				}else if(_winner){
-					ui.winHandler(_winner,gameObj)
+					api.updateGameApi(_winner,currentSquareIndex,true)
+					ui.winHandler(_winner,gameObj)					
 					endGame()
 				}
 			}
@@ -77,7 +75,6 @@ const makeMove = function(_data,gameObj){
 }
 
 const checkWinner = function(i,a){
-	// console.log(a)
 	const combos = [
 		[0,1,2],
 		[0,4,8],
@@ -100,8 +97,10 @@ const checkWinner = function(i,a){
 	}
 	
 }
-const onCreateGame = function(getToken){
-	api.createGameApi(getToken)
+const getGames = function(){
+	$('#games-modal').show()
+	api.getGamesApi()
+
 }
 //registrations and signup handlers
 const onSignUp = function(){
@@ -110,7 +109,6 @@ const onSignUp = function(){
 }
 const onSignIn = function(){
 	event.preventDefault()
-	
 	api.signInApi()
 }
 const onSignOut = function(){
@@ -126,10 +124,9 @@ module.exports = {
 	makeMove,
 	createGame,
 	checkWinner,
-	resetGame,
 	onSignUp,
 	onSignIn,
 	onSignOut,
 	onChangePassword,
-	onCreateGame
+	getGames
 }

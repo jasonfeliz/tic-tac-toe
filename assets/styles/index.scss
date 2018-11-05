@@ -78,11 +78,11 @@ nav > div > div >a:hover{
 	text-decoration:none;
 }
 
-#gameBoard {
+#gameBoard,.new-game {
 	width: 450px;
 	display:flex;
 	flex-wrap:wrap;
-	margin: 0 auto;
+	margin: 10px auto;
 
 }
 
@@ -139,6 +139,7 @@ nav > div > div >a:hover{
 
 
 #resetButton {
+ 	display:none;
 	margin: 15px 0;
 	background: #ea7363;
 	color:#fff;
@@ -162,7 +163,7 @@ nav > div > div >a:hover{
     border-radius: 10px;
 }
 #message {
-	display:block;
+	display:none;
 	font-size: 20px;
 }
 #welcome-message.failed,
