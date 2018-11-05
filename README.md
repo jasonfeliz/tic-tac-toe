@@ -1,7 +1,7 @@
 
 Welcome to the Exciting World of Tic-Tac Toe
 
-Technologies
+# Technologies
 
 - jQuery
 - Html
@@ -10,7 +10,7 @@ Technologies
 - JSON
 
 
-Planning 
+# Planning 
 
 - The scope of the project is to build a workable tic-tac-toe game,
 - The strategy was to use Javascript to manipulate the DOM and control 
@@ -31,12 +31,12 @@ My main goal was to keep my code simple and robust. I wanted to do more with les
 objects, and arrays helped me achieve this goal
 
 
-Unsolved Problems
+#Unsolved Problems
 - I wanted to display the past games view to user once the user has signed in. I noticed that when I called a callback inside the sign-in click event that my store.token would be set to as undefined. I needed the token to retrieve past games. 
 
 - As time goes, I would certaintly like to jazz up the site and add more functionalities like getting profile info, let user add a profile photo and get wins/loss record for the user
 
-User Stories
+#User Stories
 
 - game player must be able to sign up
 - game player must be able to sign in
