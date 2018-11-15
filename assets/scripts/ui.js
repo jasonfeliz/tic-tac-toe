@@ -2,6 +2,7 @@ const store = require('./store.js')
 
 $('.close,.cancel-button').click(function(){
 	$('.modal').hide()
+	$('input').val("")
 })
 
 $('#register').click(function(){
@@ -19,6 +20,7 @@ const signUpSuccessHandler = function(response){
 		$('.modal-message').hide()
 		$('.modal-message').html("")
 		$('#welcome-message').show()
+		$('input').val("")
 }
 const signUpFailureHandler = function(response){
 		$('.modal-message').show()
@@ -35,6 +37,7 @@ const signInSuccessHandler = function(response){
 		$('#gameBoard div').map(function(){
 			$(this).css("pointer-events","unset")
 		});
+		$('input').val("")
 }
 const signInFailureHandler = function(response){
 		$('.modal-message').show()
@@ -53,6 +56,7 @@ const createGameFailedHandler = function(response){
 		$('#signedin,.nav-links,.modal-message').hide()
 		$('#not-signedin').show()
 		$('#main-content').css("filter","blur(5px)")
+		$('input').text("")
  }
 
 const getGamesHandler = function(response){
