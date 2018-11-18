@@ -47,5 +47,5 @@ objects, and arrays helped me achieve this goal
 - game player must be able to reset a current game or finished game
 
 # wireframe
-[Imgur](https://i.imgur.com/mcK2axZ.jpg)
-[Imgur](https://i.imgur.com/vbKsNou.jpg)
+![alt text](https://i.imgur.com/mcK2axZ.jpg "Logo Title Text 1")
+![alt text](https://i.imgur.com/vbKsNou.jpg "Logo Title Text 1")
