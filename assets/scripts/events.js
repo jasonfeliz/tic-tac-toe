@@ -27,9 +27,6 @@ const createGame = function(gameObj){
 
 }
 
-
-
-
 const endGame = function(){
 	$('#gameBoard div').map(function(){
 		$(this).css("pointer-events","none")
@@ -38,6 +35,7 @@ const endGame = function(){
 
 const makeMove = function(_data,gameObj){
 	const currentSquareIndex = _data.data('squareid')
+	if (!gameObj.gameOver) {
 		if(_data.text() === "") {
 			api.updateGameApi(gameObj.currentPlayer,currentSquareIndex,false)
 			_data.text(gameObj.currentPlayer)
@@ -68,7 +66,9 @@ const makeMove = function(_data,gameObj){
 			//display message to board that its an illegal move
 			$('#message').html("Please click on an empty square")
 
-		}
+		}		
+	}
+
 
 
 	
