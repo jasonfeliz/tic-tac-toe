@@ -11,7 +11,8 @@ $(() => {
 		player_two:"o",
 		currentPlayer:"",
 		moves: new Array(),
-		winner:false
+		winner:false,
+		gameOver:false
 	}
 
 	for(let i=0;i < 9;i++){
@@ -32,13 +33,16 @@ $(() => {
 	// //when page loads, create tic tac toe board
 		
 
-		$('#newGameButton,#resetButton').click(function(){
-			events.createGame(gameObj);
+	$('#newGameButton,#resetButton').click(function(){
+		events.createGame(gameObj);
 			//when user clicks
-			$('.square').click(function(){
-				events.makeMove($(this),gameObj)
-			})
+		$('.square').click(function(){
+			events.makeMove($(this),gameObj)
 		})
+	})
+
+
+
 
 		$('#getPastGames').click(function(){
 			events.getGames();

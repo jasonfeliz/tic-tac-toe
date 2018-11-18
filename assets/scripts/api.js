@@ -64,6 +64,7 @@ const changePasswordApi = function(){
 			setTimeout(function(){
 				$('#welcome-message').hide()
 			},4000)
+			$('input').val("")
 		},
 		error: function(response){
 			$('.modal-message').show()
