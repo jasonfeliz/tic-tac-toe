@@ -17,22 +17,42 @@ $('#change-password').click(function(){
 	$('#cp-modal').show()
 })
 const signUpSuccessHandler = function(response){
-		$('.modal').hide()
-		$('#welcome-message').html("Registration Successful! Sign In to start playing!")
-		$('.modal-message').hide()
-		$('.modal-message').html("")
+    store.user = response.user
+    $('.register-message').text('').removeClass("fail-message")
+		$('#welcome-message').html("Weclome to the exciting world of Tic Tac Toe!")
+    $('#not-signedin,.modal-message,#register-landing').hide()
+    $('#signedin').show()
+		$('#signedin,.nav-links').show()
+		$('#gameBoard div').map(function(){
+			$(this).css("pointer-events","unset")
+		});
 		$('#welcome-message').show()
+    setTimeout(function(){
+      $('#welcome-message').hide()
+    },4000)
 		$('input').val("")
 }
 const signUpFailureHandler = function(response){
-		$('.modal-message').show()
-		$('.modal-message').html("Oops! Something went wrong. Try again.")
+    let message = ""
+    const responseKey = Object.keys(response.responseJSON)[0]
+    if(responseKey === 'email') {
+      message = "Email is already in use"
+    }else if(responseKey === 'password_confirmation'){
+      message = "Passwords do not match"
+    }else {
+      message = "Oops! Something went wrong"
+    }
+		$('.register-message').text(message).addClass("fail-message")
 }
 const signInSuccessHandler = function(response){
 		store.user = response.user
+    $('.register-message').text('').removeClass("fail-message")
 		$('.modal').hide()
     $('.wrapper').css("filter","unset")
-		$('#welcome-message').hide()
+		$('#welcome-message').html("Weclome to the exciting world of Tic Tac Toe!")
+    setTimeout(function(){
+      $('#welcome-message').hide()
+    },4000)
 		$('#not-signedin,.modal-message,#register-landing').hide()
 		$('#signedin').show()
 		$('#signedin,.nav-links').show()
@@ -59,6 +79,21 @@ const createGameFailedHandler = function(response){
 		$('#not-signedin,#register-landing').show()
 		$('input').text("")
  }
+
+const changePasswordSuccess = function(){
+  $('.modal,.modal-message').hide()
+  $('#welcome-message').html("Password has successfully changed.")
+  $('#welcome-message').show()
+  setTimeout(function(){
+    $('#welcome-message').hide()
+  },4000)
+  $('input').val("")
+}
+
+const changePasswordFailure = function(){
+  $('.modal-message').show()
+  $('.modal-message').html("You've entered an invalid old password")
+}
 
 const getGamesHandler = function(response){
 		let content = ""
@@ -102,5 +137,7 @@ module.exports = {
 	createGameSuccessHandler,
 	createGameFailedHandler,
 	signOutSuccessHandler,
-	getGamesHandler
+	getGamesHandler,
+  changePasswordSuccess,
+  changePasswordFailure
 }

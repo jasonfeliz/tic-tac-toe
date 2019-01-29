@@ -18,6 +18,8 @@ const displayBoard = function(){
 //creates a new game
 const createGame = function(gameObj){
 	api.createGameApi()
+    .then(ui.createGameSuccessHandler)
+    .catch(ui.createGameFailedHandler)
 	for(let i=0;i < 9;i++){
 		gameObj.moves[i] = i;
 	}
@@ -95,24 +97,46 @@ const checkWinner = function(i,a){
 const getGames = function(){
 	$('#games-modal').show()
 	api.getGamesApi()
+    .then(ui.getGamesHandler)
+    .catch(console.error)
 
 }
 //registrations and signup handlers
 const onSignUp = function(){
 	event.preventDefault()
-	api.signUpApi()
+  const credentialsObj = {"credentials":{}}
+	$('#register-form').serializeArray().forEach(function(e){
+		credentialsObj.credentials[e.name] = e.value
+	})
+	api.signUpApi(credentialsObj)
+    .then(function(){
+      return api.signInApi(credentialsObj)
+    })
+    .then(ui.signInSuccessHandler)
+    .catch(ui.signUpFailureHandler)
 }
 const onSignIn = function(){
 	event.preventDefault()
-	api.signInApi()
+  const credentialsObj = {"credentials":{}}
+	$('#signin-form').serializeArray().forEach(function(e){
+		credentialsObj.credentials[e.name] = e.value
+	})
+	api.signInApi(credentialsObj)
+  .then(ui.signInSuccessHandler)
+  .catch(ui.signInFailureHandler)
+
 }
 const onSignOut = function(){
 	event.preventDefault()
 	api.signOutApi()
+  .then(ui.signOutSuccessHandler)
+  .catch(console.error)
 }
 const onChangePassword = function(){
 	event.preventDefault()
 	api.changePasswordApi()
+  .then(ui.changePasswordSuccess)
+  .catch(ui.changePasswordFailure)
 }
 module.exports = {
 	displayBoard,
