@@ -3,13 +3,15 @@ const store = require('./store.js')
 $('.close,.cancel-button').click(function(){
 	$('.modal').hide()
 	$('input').val("")
+  $('.wrapper').css("filter","unset")
 })
 
 $('#register').click(function(){
 	$('#register-modal').show()
 })
-$('#signin').click(function(){
+$('#signin,#signin-link ').click(function(){
 	$('#signin-modal').show()
+  $('.wrapper').css("filter","blur(5px)")
 })
 $('#change-password').click(function(){
 	$('#cp-modal').show()
@@ -29,10 +31,10 @@ const signUpFailureHandler = function(response){
 const signInSuccessHandler = function(response){
 		store.user = response.user
 		$('.modal').hide()
+    $('.wrapper').css("filter","unset")
 		$('#welcome-message').hide()
-		$('#not-signedin,.modal-message').hide()
+		$('#not-signedin,.modal-message,#register-landing').hide()
 		$('#signedin').show()
-		$('#main-content').css("filter","unset")
 		$('#signedin,.nav-links').show()
 		$('#gameBoard div').map(function(){
 			$(this).css("pointer-events","unset")
@@ -53,9 +55,8 @@ const createGameFailedHandler = function(response){
  const signOutSuccessHandler = function(response){
  		$('#welcome-message').html("You have logged out. Come back soon!")
 		$('#welcome-message').show()
-		$('#signedin,.nav-links,.modal-message').hide()
-		$('#not-signedin').show()
-		$('#main-content').css("filter","blur(5px)")
+		$('#signedin,.nav-links,.modal-message, #main-content').hide()
+		$('#not-signedin,#register-landing').show()
 		$('input').text("")
  }
 
@@ -80,7 +81,7 @@ const winHandler = function(_winner,gameObj){
 	}else{
 		gameObj.winner = gameObj.player_two
 	}
-	//TO-DO 
+	//TO-DO
 	//display winning message to board
 	$('#message').html(_winner + " wins the game!")
 }

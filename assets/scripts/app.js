@@ -10,20 +10,16 @@ $(() => {
 		player_one:"x",
 		player_two:"o",
 		currentPlayer:"",
-		moves: new Array(),
+		moves: [0,1,2,3,4,5,6,7,8],
 		winner:false,
 		gameOver:false
 	}
 
-	for(let i=0;i < 9;i++){
-		gameObj.moves[i] = i;
-	}
-
 	$('#signedin,.nav-links').hide()
 	$('#welcome-message').show()
-	$('#welcome-message').html("Register or Sign In to get started!")
+	$('#welcome-message').html("Register to get started!")
 	//when user clicks register button
-	$("#register-button").click(events.onSignUp)
+	$("#register-form").submit(events.onSignUp)
 	$("#signin-button").click(function(){
 		events.onSignIn()
 	})
@@ -31,7 +27,7 @@ $(() => {
 	$("#signout").click(events.onSignOut)
 
 	// //when page loads, create tic tac toe board
-		
+
 
 	$('#newGameButton,#resetButton').click(function(){
 		events.createGame(gameObj);
@@ -46,7 +42,7 @@ $(() => {
 
 		$('#getPastGames').click(function(){
 			events.getGames();
-			
+
 		})
 
 

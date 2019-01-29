@@ -1,6 +1,7 @@
 const api = require('./api.js')
 const ui = require('./ui.js')
 
+//display game board when called
 const displayBoard = function(){
 	$('#gameBoard').html("")
 	const arr = new Array(3);
@@ -14,6 +15,7 @@ const displayBoard = function(){
 	}
 }
 
+//creates a new game
 const createGame = function(gameObj){
 	api.createGameApi()
 	for(let i=0;i < 9;i++){
@@ -21,12 +23,13 @@ const createGame = function(gameObj){
 	}
 	displayBoard()
 	gameObj.currentPlayer = gameObj.player_one
-	gameObj.winner = false	
+	gameObj.winner = false
 	$('#message,#resetButton').show()
 	$('#message').html(gameObj.currentPlayer+ " , it's your turn to play")
 
 }
 
+//ends a game
 const endGame = function(){
 	$('#gameBoard div').map(function(){
 		$(this).css("pointer-events","none")
@@ -51,14 +54,14 @@ const makeMove = function(_data,gameObj){
 			const movesArr = gameObj.moves
 			let movesArrLength = movesArr.filter((e) => isNaN(e)).length
 			if(movesArrLength > 4){
-				const _winner = checkWinner(currentSquareIndex,movesArr) 
+				const _winner = checkWinner(currentSquareIndex,movesArr)
 				if (!_winner && movesArrLength === 9) {
 					api.updateGameApi(_data.text(),currentSquareIndex,true)
 					ui.tieHandler(_winner)
 					endGame()
 				}else if(_winner){
 					api.updateGameApi(_winner,currentSquareIndex,true)
-					ui.winHandler(_winner,gameObj)					
+					ui.winHandler(_winner,gameObj)
 					endGame()
 				}
 			}
@@ -66,12 +69,8 @@ const makeMove = function(_data,gameObj){
 			//display message to board that its an illegal move
 			$('#message').html("Please click on an empty square")
 
-		}		
+		}
 	}
-
-
-
-	
 }
 
 const checkWinner = function(i,a){
@@ -88,15 +87,11 @@ const checkWinner = function(i,a){
 	let match = combos.find(function (index){
         if (a[index[0]] === a[index[1]] && a[index[1]] === a[index[2]]) {
           return true
-        } 
-	}) 
-	if (match) {
-		return a[i]
-	}else{
-		return false
-	}
-	
+        }
+	})
+  return match ? a[i] : false
 }
+
 const getGames = function(){
 	$('#games-modal').show()
 	api.getGamesApi()
