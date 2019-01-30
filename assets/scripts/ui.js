@@ -46,16 +46,15 @@ const signUpFailureHandler = function(response){
 }
 const signInSuccessHandler = function(response){
 		store.user = response.user
+    $('#user-greet').text('Welcome, ' + store.user.email.split('@').shift())
     $('.register-message').text('').removeClass("fail-message")
-		$('.modal').hide()
     $('.wrapper').css("filter","unset")
 		$('#welcome-message').html("Weclome to the exciting world of Tic Tac Toe!")
     setTimeout(function(){
       $('#welcome-message').hide()
     },4000)
-		$('#not-signedin,.modal-message,#register-landing').hide()
-		$('#signedin').show()
-		$('#signedin,.nav-links').show()
+		$('#not-signedin,.modal-message,#register-landing,.modal').hide()
+		$('#signedin,.nav-links,.modal-message, #main-content').show()
 		$('#gameBoard div').map(function(){
 			$(this).css("pointer-events","unset")
 		});
@@ -73,8 +72,11 @@ const createGameFailedHandler = function(response){
 	console.log(response)
 }
  const signOutSuccessHandler = function(response){
+    store.user = null
+    store.game = null
  		$('#welcome-message').html("You have logged out. Come back soon!")
 		$('#welcome-message').show()
+    $('#gameBoard').html('')
 		$('#signedin,.nav-links,.modal-message, #main-content').hide()
 		$('#not-signedin,#register-landing').show()
 		$('input').text("")
@@ -86,7 +88,7 @@ const changePasswordSuccess = function(){
   $('#welcome-message').show()
   setTimeout(function(){
     $('#welcome-message').hide()
-  },4000)
+  },3000)
   $('input').val("")
 }
 
@@ -95,15 +97,38 @@ const changePasswordFailure = function(){
   $('.modal-message').html("You've entered an invalid old password")
 }
 
+const getWinner = function(a){
+  const combos = [
+		[0,1,2],
+		[0,4,8],
+		[0,3,6],
+		[1,4,7],
+		[2,4,6],
+		[2,5,8],
+		[3,4,5],
+		[6,7,8]]
+
+	let match = combos.find(function (index){
+        if (a[index[0]] === a[index[1]] && a[index[1]] === a[index[2]]) {
+          return a[index[1]]
+        }
+	})
+  return match ? a[match[0]] : false
+}
+
 const getGamesHandler = function(response){
+
 		let content = ""
-		$('#gameBoard').html("")
+    $('#gameBoard').html("").css('width', '75%')
 		response.games.forEach(function(e,i){
+      let winner = getWinner(response.games[i].cells)
 			content += '<div class="new-game">'
+      content += winner ? `<span>Winner: ${winner}</span>` : `<span>It's a Tie</span>`
+      content += `<div class="game">`
 			e.cells.forEach(function(_a){
 				content += '<div class="square">' + _a +'</div>'
 			})
-			content += '</div>'
+			content += '</div></div>'
 		})
 		$('#gameBoard').html(content)
 		$('#resetButton').hide()

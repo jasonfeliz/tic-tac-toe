@@ -3,7 +3,7 @@ const ui = require('./ui.js')
 
 //display game board when called
 const displayBoard = function(){
-	$('#gameBoard').html("")
+	$('#gameBoard').html("").css('width', '30%')
 	const arr = new Array(3);
 	let counter = 0;
 	for(let i =0; i < arr.length; i++){
@@ -94,8 +94,27 @@ const checkWinner = function(i,a){
   return match ? a[i] : false
 }
 
+const getWinner = function(a){
+  const combos = [
+		[0,1,2],
+		[0,4,8],
+		[0,3,6],
+		[1,4,7],
+		[2,4,6],
+		[2,5,8],
+		[3,4,5],
+		[6,7,8]]
+
+	let match = combos.find(function (index){
+        if (a[index[0]] === a[index[1]] && a[index[1]] === a[index[2]]) {
+          return a[index[1]]
+        }
+	})
+  return match
+}
+
+
 const getGames = function(){
-	$('#games-modal').show()
 	api.getGamesApi()
     .then(ui.getGamesHandler)
     .catch(console.error)

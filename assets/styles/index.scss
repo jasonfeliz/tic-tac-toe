@@ -80,16 +80,33 @@ nav > div > div >a:hover{
 	text-decoration:none;
 }
 
-#gameBoard,.new-game {
-	width: 450px;
-	display:flex;
-	flex-wrap:wrap;
+#gameBoard {
+	width: 75%;
 	margin: 10px auto;
-
+  display:flex;
+  flex-wrap:wrap;
 }
 
+.new-game {
+  width: 32%;
+  margin: auto;
+}
+
+.new-game span {
+  font-family: 'Quicksand', helvetica;
+  font-size: 2em;
+  text-transform: uppercase;
+  color:rgba(0,0,0,.75);
+}
+
+.new-game > .game {
+  width: 100%;
+  display:flex;
+  flex-wrap:wrap;
+  margin: 25px auto;
+}
 .square{
-	width: 150px;
+	width: 33.3%;
 	height: 150px;
 	text-align: center;
 	box-shadow:1px 1px 5px 0px rgba(0, 0, 0, 0.32);
@@ -131,7 +148,6 @@ nav > div > div >a:hover{
 	color:#fff;
 }
 #main-content {
-	max-width: 600px;
 	margin:75px auto 0 auto;
 	text-align:center;
 }
